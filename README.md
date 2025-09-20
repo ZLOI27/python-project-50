@@ -1,3 +1,5 @@
+## Difference Calculator
+This program takes two files as arguments, compares them, and outputs the differences between them.
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/ZLOI27/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ZLOI27/python-project-50/actions)
 ### Asciinema gendiff of two files
