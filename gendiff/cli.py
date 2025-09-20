@@ -5,7 +5,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         prog='gendiff',
         description='Compares two configuration files and shows a difference.',
-        epilog='Hi, Lyova Parsyan!)'
+        epilog='Hi, Lyova!)'
     )
 
     parser.add_argument('-f', '--format', help='set format of output')
@@ -13,4 +13,3 @@ def parse_args():
     parser.add_argument('second_file')
 
     return parser.parse_args()
-

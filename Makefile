@@ -18,5 +18,8 @@ check: test lint
 build:
 	uv build
 
+file-test:
+	uv run gendiff /home/zk/python-project-50/file1.json /home/zk/python-project-50/file2.json
+
 .PHONY: install test lint selfcheck check build
 
