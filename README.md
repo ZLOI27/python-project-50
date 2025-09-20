@@ -6,5 +6,16 @@ This program takes two files as arguments, compares them, and outputs the differ
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hexlet-boilerplates_python-package&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hexlet-boilerplates_python-package)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hexlet-boilerplates_python-package&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hexlet-boilerplates_python-package)
 
+### Setup
+```bash
+make install
+```
+
+
+### Run tests
+```bash
+make test
+```
+
 ### Asciinema gendiff of two files
 [![asciicast](https://asciinema.org/a/0naRf02Fr7ymDJ0kPU9AUXnbh.svg)](https://asciinema.org/a/0naRf02Fr7ymDJ0kPU9AUXnbh)
