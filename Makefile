@@ -4,6 +4,9 @@ install:
 run:
 	uv run gendiff
 
+package-install:
+	uv tool install --force dist/*.whl
+
 test:
 	uv run pytest
 
