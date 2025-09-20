@@ -13,7 +13,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "hexlet-code",
     "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
     "ruff>=0.13.0",
 ]
 
@@ -26,4 +28,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["gendiff"]
+
+[tool.uv.sources]
+hexlet-code = { workspace = true }
 
