@@ -1,6 +1,6 @@
 import json
 
-from .cli import parse_args
+from gendiff.cli import parse_args
 
 
 def main() -> None:
@@ -73,6 +73,4 @@ def make_str_from_list(items: list) -> str:
 def generate_diff(path1, path2) -> str:
     data1 = read_file_json(path1)
     data2 = read_file_json(path2)
-    result = sort_list(get_list_of_dict_with_sign(data1, data2))
-    result = make_str_from_list(result)
-    return result
+    return make_str_from_list(sort_list(get_list_of_dict_with_sign(data1, data2)))

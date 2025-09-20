@@ -1,4 +1,4 @@
-from ..gendiff import main
+from gendiff.core import main
 
 if __name__ == '__main__':
     main()

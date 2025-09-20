@@ -1,4 +1,4 @@
-from gendiff.gendiff import generate_diff, read_file_json, sort_list
+from gendiff.core import generate_diff, read_file_json, sort_list
 
 path1 = '/home/zk/python-project-50/file1.json'
 data1 = {
