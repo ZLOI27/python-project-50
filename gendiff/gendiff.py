@@ -34,6 +34,7 @@ def get_list_of_dict_with_sign(data1, data2) -> list:
 
 def sort_list(items: list):
     def sort_by_rule(item: dict) -> str:
+        """The sign is changed to correctly sort items with the same key."""
         if item['sign'] == '+':
             sign = '-'
         elif item['sign'] == '-':
@@ -46,6 +47,10 @@ def sort_list(items: list):
 
 
 def make_str_from_list(items: list) -> str:
+    """
+    Type checking for the output of strings without quotes,
+    and for the correct output of True, False in the form of true, false.
+    """
     list_of_str = ['{']
     for item in items:
         sign = item['sign']
