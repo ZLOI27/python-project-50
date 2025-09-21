@@ -25,7 +25,7 @@ build:
 	uv build
 
 file-test:
-	uv run gendiff /home/zk/python-project-50/file1.json /home/zk/python-project-50/file2.json
+	uv run gendiff /home/zk/python-project-50/tests/test_data/file1.json /home/zk/python-project-50/tests/test_data/file2.json
 
 full-check: test-coverage-without-xml file-test lint 
 

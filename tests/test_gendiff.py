@@ -1,33 +1,9 @@
 import os
-import tempfile
-
-import pytest
 
 from gendiff.gendiff import generate_diff, read_file_json, sort_list
 
-
-@pytest.fixture
-def temp_dir_with_files():
-    with tempfile.TemporaryDirectory() as temp_dir:
-        file1_path = os.path.join(temp_dir, 'file1.json')
-        file2_path = os.path.join(temp_dir, 'file2.json')
-
-        with open(file1_path, 'w') as f:
-            f.write('{\n'
-            '"host": "hexlet.io",\n'
-            '"timeout": 50,\n'
-            '"proxy": "123.234.53.22",\n'
-            '"follow": false\n'
-            '}')
-        with open(file2_path, 'w') as f:
-            f.write('{\n'
-            '"timeout": 20,\n'
-            '"verbose": true,\n'
-            '"host": "hexlet.io"\n'
-            '}')
-
-        yield temp_dir
-
+current_dir = os.path.dirname(os.path.abspath(__file__))
+dir_with_data = os.path.join(current_dir, 'test_data')
 
 data1 = {
     "host": "hexlet.io",
@@ -43,9 +19,9 @@ data2 = {
 }
 
 
-def test_read_file_json(temp_dir_with_files):
-    file1_path = os.path.join(temp_dir_with_files, 'file1.json')
-    file2_path = os.path.join(temp_dir_with_files, 'file2.json')
+def test_read_file_json():
+    file1_path = os.path.join(dir_with_data, 'file1.json')
+    file2_path = os.path.join(dir_with_data, 'file2.json')
     assert read_file_json(file1_path) == data1
     assert read_file_json(file1_path) != data2
     assert read_file_json(file2_path) == data2
@@ -70,7 +46,7 @@ def test_sort_list():
     ]
 
 
-def test_generate_diff(temp_dir_with_files):
+def test_generate_diff():
     right_str = ("{\n"
                  "  - follow: false\n"
                  "    host: hexlet.io\n"
@@ -80,7 +56,7 @@ def test_generate_diff(temp_dir_with_files):
                  "  + verbose: true\n"
                  "}")
     wrong_str = ''
-    file1_path = os.path.join(temp_dir_with_files, 'file1.json')
-    file2_path = os.path.join(temp_dir_with_files, 'file2.json')
+    file1_path = os.path.join(dir_with_data, 'file1.json')
+    file2_path = os.path.join(dir_with_data, 'file2.json')
     assert generate_diff(file1_path, file2_path) == right_str
     assert generate_diff(file1_path, file2_path) != wrong_str
