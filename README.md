@@ -6,15 +6,25 @@ This program takes two files as arguments, compares them, and outputs the differ
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ZLOI27_python-project-50&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ZLOI27_python-project-50)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ZLOI27_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ZLOI27_python-project-50)
 
-### Setup
+### Setup all dependencies
 ```bash
 make install
 ```
 
+### Install package global
+```bash
+make build
+make package-install
+```
 
 ### Run tests
 ```bash
 make test
+```
+
+### Run tests with coverage, run with test-files and ruff check
+```bash
+make full-check
 ```
 
 ### Asciinema gendiff of two files
