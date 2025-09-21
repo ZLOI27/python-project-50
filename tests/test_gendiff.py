@@ -3,8 +3,8 @@ import tempfile
 
 import pytest
 
-from gendiff.gendiff import generate_diff, read_file_json, sort_list
 from gendiff.cli import parse_args
+from gendiff.gendiff import generate_diff, read_file_json, sort_list
 
 
 @pytest.fixture
