@@ -13,6 +13,9 @@ test:
 test-coverage:
 	uv run pytest --cov=gendiff --cov-report=xml tests/
 
+test-coverage-without-xml:
+	uv run pytest --cov=gendiff
+
 lint:
 	uv run ruff check
 
@@ -23,6 +26,8 @@ build:
 
 file-test:
 	uv run gendiff /home/zk/python-project-50/file1.json /home/zk/python-project-50/file2.json
+
+full-check: test lint file-test test-coverage-without-xml
 
 .PHONY: install test lint selfcheck check build
 
