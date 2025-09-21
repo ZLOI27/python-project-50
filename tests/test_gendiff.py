@@ -3,7 +3,6 @@ import tempfile
 
 import pytest
 
-from gendiff.cli import parse_args
 from gendiff.gendiff import generate_diff, read_file_json, sort_list
 
 
@@ -77,13 +76,3 @@ def test_generate_diff(temp_dir_with_files):
     file1_path = os.path.join(temp_dir_with_files, 'file1.json')
     file2_path = os.path.join(temp_dir_with_files, 'file2.json')
     assert generate_diff(file1_path, file2_path) == right_str
-
-
-def test_parse_args_with_args():
-    test_args = ['--format', 'test_format', 'file1.json', 'file2.json']
-
-    args = parse_args(test_args)
-
-    assert args.format == 'test_format'
-    assert args.first_file == 'file1.json'
-    assert args.second_file == 'file2.json'

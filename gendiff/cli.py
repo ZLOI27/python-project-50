@@ -1,7 +1,7 @@
 import argparse
 
 
-def parse_args(args=None):
+def parse_args(args=None):  # args need only for test
     parser = argparse.ArgumentParser(
         prog='gendiff',
         description='Compares two configuration files and shows a difference.',
