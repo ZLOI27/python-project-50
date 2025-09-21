@@ -47,8 +47,9 @@ def test_read_file_json(temp_dir_with_files):
     file1_path = os.path.join(temp_dir_with_files, 'file1.json')
     file2_path = os.path.join(temp_dir_with_files, 'file2.json')
     assert read_file_json(file1_path) == data1
-
+    assert read_file_json(file1_path) != data2
     assert read_file_json(file2_path) == data2
+    assert read_file_json(file2_path) != data1
 
 
 def test_sort_list():
@@ -62,17 +63,24 @@ def test_sort_list():
         {'key': 'qwe', 'sign': '-', 'value': 3},
         {'key': 'qwe', 'sign': '+', 'value': 3},
     ]
+    assert sort_list(lst) != [
+        {'key': 'abc', 'sign': ' ', 'value': 3},
+        {'key': 'qwe', 'sign': '+', 'value': 3},
+        {'key': 'qwe', 'sign': '-', 'value': 3},
+    ]
 
 
 def test_generate_diff(temp_dir_with_files):
     right_str = ("{\n"
-    "  - follow: false\n"
-    "    host: hexlet.io\n"
-    "  - proxy: 123.234.53.22\n"
-    "  - timeout: 50\n"
-    "  + timeout: 20\n"
-    "  + verbose: true\n"
-    "}")
+                 "  - follow: false\n"
+                 "    host: hexlet.io\n"
+                 "  - proxy: 123.234.53.22\n"
+                 "  - timeout: 50\n"
+                 "  + timeout: 20\n"
+                 "  + verbose: true\n"
+                 "}")
+    wrong_str = ''
     file1_path = os.path.join(temp_dir_with_files, 'file1.json')
     file2_path = os.path.join(temp_dir_with_files, 'file2.json')
     assert generate_diff(file1_path, file2_path) == right_str
+    assert generate_diff(file1_path, file2_path) != wrong_str
