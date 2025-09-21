@@ -24,10 +24,13 @@ check: test lint
 build:
 	uv build
 
-file-test:
+file-test-json:
 	uv run gendiff /home/zk/python-project-50/tests/test_data/file1.json /home/zk/python-project-50/tests/test_data/file2.json
 
-full-check: test-coverage-without-xml file-test lint 
+file-test-yaml:
+	uv run gendiff /home/zk/python-project-50/tests/test_data/file1.yaml /home/zk/python-project-50/tests/test_data/file2.yaml
+
+full-check: test-coverage-without-xml file-test-json lint 
 
 .PHONY: install test lint selfcheck check build
 

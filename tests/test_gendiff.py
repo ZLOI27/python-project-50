@@ -1,31 +1,37 @@
 import os
 
-from gendiff.gendiff import generate_diff, read_file_json, sort_list
+from gendiff.gendiff import generate_diff, read_file, sort_list
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 dir_with_data = os.path.join(current_dir, 'test_data')
 
-data1 = {
+right_data1 = {
     "host": "hexlet.io",
     "timeout": 50,
     "proxy": "123.234.53.22",
     "follow": False
 }
 
-data2 = {
+right_data2 = {
     "timeout": 20,
     "verbose": True,
     "host": "hexlet.io"
 }
 
 
-def test_read_file_json():
-    file1_path = os.path.join(dir_with_data, 'file1.json')
-    file2_path = os.path.join(dir_with_data, 'file2.json')
-    assert read_file_json(file1_path) == data1
-    assert read_file_json(file1_path) != data2
-    assert read_file_json(file2_path) == data2
-    assert read_file_json(file2_path) != data1
+def test_read_file():
+    file1_path_json = os.path.join(dir_with_data, 'file1.json')
+    file2_path_json = os.path.join(dir_with_data, 'file2.json')
+    file1_path_yaml = os.path.join(dir_with_data, 'file1.yaml')
+    file2_path_yaml = os.path.join(dir_with_data, 'file2.yaml')
+    assert read_file(file1_path_json) == right_data1
+    assert read_file(file1_path_json) != right_data2
+    assert read_file(file2_path_json) == right_data2
+    assert read_file(file2_path_json) != right_data1
+    assert read_file(file1_path_yaml) == right_data1
+    assert read_file(file1_path_yaml) != right_data2
+    assert read_file(file2_path_yaml) == right_data2
+    assert read_file(file2_path_yaml) != right_data1
 
 
 def test_sort_list():
@@ -56,7 +62,11 @@ def test_generate_diff():
                  "  + verbose: true\n"
                  "}")
     wrong_str = ''
-    file1_path = os.path.join(dir_with_data, 'file1.json')
-    file2_path = os.path.join(dir_with_data, 'file2.json')
-    assert generate_diff(file1_path, file2_path) == right_str
-    assert generate_diff(file1_path, file2_path) != wrong_str
+    file1_path_json = os.path.join(dir_with_data, 'file1.json')
+    file2_path_json = os.path.join(dir_with_data, 'file2.json')
+    file1_path_yaml = os.path.join(dir_with_data, 'file1.yaml')
+    file2_path_yaml = os.path.join(dir_with_data, 'file2.yaml')
+    assert generate_diff(file1_path_json, file2_path_json) == right_str
+    assert generate_diff(file1_path_json, file2_path_json) != wrong_str
+    assert generate_diff(file1_path_yaml, file2_path_yaml) == right_str
+    assert generate_diff(file1_path_yaml, file2_path_yaml) != wrong_str
