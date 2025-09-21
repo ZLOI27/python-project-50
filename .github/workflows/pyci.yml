@@ -20,6 +20,7 @@ jobs:
           make install
       - name: Run linter and pytest
         run: |
+          make sync
           make check
       - name: Run test coverage
         run: |
