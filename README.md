@@ -2,7 +2,7 @@
 This program takes two files as arguments, compares them, and outputs the differences between them.
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/ZLOI27/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ZLOI27/python-project-50/actions)
-[![Github Actions Status](https://github.com/hexlet-boilerplates/python-package/workflows/Python%20CI/badge.svg)](https://github.com/ZLOI27/python-project-50/actions)
+[![Python CI](https://github.com/ZLOI27/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/ZLOI27/python-project-50/actions/workflows/pyci.yml)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ZLOI27_python-project-50&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ZLOI27_python-project-50)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ZLOI27_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ZLOI27_python-project-50)
 
