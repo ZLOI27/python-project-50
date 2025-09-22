@@ -11,17 +11,22 @@ def main() -> None:
 
 
 def read_file(path: str):
-    if path.endswith('.json'):
-        load_data = json.load
-    elif path.endswith(('.yaml', '.yml')):
-        load_data = yaml.safe_load
-    else:
-        raise ValueError(f"ERROR: Unsupported format of file {path}.")
     try:
+        if path.endswith('.json'):
+            load_data = json.load
+        elif path.endswith(('.yaml', '.yml')):
+            load_data = yaml.safe_load
+        else:
+            raise ValueError
+
         with open(path, mode='r', encoding='utf-8') as file:
             return load_data(file)
     except OSError as error:
-        raise OSError(f"ERROR: Can't read file {path}. Reason: {error}")
+        print(f"ERROR: Can't read file {path}. Reason: {error}")
+        return None
+    except ValueError:
+        print(f"ERROR: Unsupported format of file {path}.")
+        return None
 
 
 def get_list_of_dict_with_sign(data1, data2) -> list:
@@ -71,6 +76,13 @@ def make_str_from_list(items: list) -> str:
         list_of_str.append(f"  {sign} {key}: {value}")
     list_of_str.append('}')
     return '\n'.join(list_of_str)
+
+
+# def check_the_nesting(list_of_dict: list) -> list:
+#     for item in list_of_dict:
+#         value = item['value']
+#         if isinstance(value, dict):
+#             get_list_of_dict_with_sign(value)
 
 
 def generate_diff(path1, path2) -> str:
