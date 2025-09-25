@@ -54,19 +54,39 @@ def test_sort_list():
 
 def test_generate_diff():
     right_str = ("{\n"
-                 "  - follow: false\n"
-                 "    host: hexlet.io\n"
-                 "  - proxy: 123.234.53.22\n"
-                 "  - timeout: 50\n"
-                 "  + timeout: 20\n"
-                 "  + verbose: true\n"
-                 "}")
+                "  - follow: false\n"
+                "    host: hexlet.io\n"
+                "  - proxy: 123.234.53.22\n"
+                "  - timeout: 50\n"
+                "  + timeout: 20\n"
+                "  + verbose: true\n"
+                "}")
+    test_file_path = os.path.join(dir_with_data, 'test_result.txt')
+    try:
+        with open(test_file_path, 'r', encoding='utf-8') as file:
+            right_data = file.read()
+    except OSError:
+        print('Can not open test_file.')
+
     wrong_str = ''
+    print(right_data)
     file1_path_json = os.path.join(dir_with_data, 'file1.json')
     file2_path_json = os.path.join(dir_with_data, 'file2.json')
     file1_path_yaml = os.path.join(dir_with_data, 'file1.yaml')
     file2_path_yaml = os.path.join(dir_with_data, 'file2.yaml')
+
+    file3_path_json = os.path.join(dir_with_data, 'file3.json')
+    file4_path_json = os.path.join(dir_with_data, 'file4.json')
+    file3_path_yaml = os.path.join(dir_with_data, 'file3.yaml')
+    file4_path_yaml = os.path.join(dir_with_data, 'file4.yaml')
+
     assert generate_diff(file1_path_json, file2_path_json) == right_str
     assert generate_diff(file1_path_json, file2_path_json) != wrong_str
     assert generate_diff(file1_path_yaml, file2_path_yaml) == right_str
     assert generate_diff(file1_path_yaml, file2_path_yaml) != wrong_str
+
+    assert generate_diff(file3_path_json, file4_path_json) == right_data
+    assert generate_diff(file3_path_json, file4_path_json) != wrong_str
+    assert generate_diff(file3_path_yaml, file4_path_yaml) == right_data
+    assert generate_diff(file3_path_yaml, file4_path_yaml) != wrong_str
+

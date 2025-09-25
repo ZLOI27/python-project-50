@@ -3,6 +3,7 @@ import json
 import yaml
 
 from gendiff.cli import parse_args
+from gendiff.views import make_str_from_list
 
 
 def read_file(path: str):
@@ -22,54 +23,6 @@ def read_file(path: str):
     except ValueError:
         print(f"ERROR: Unsupported format of file {path}.")
         return None
-
-
-def make_str_from_dict(items: dict, enclos=0) -> str:
-    indent = '    ' * enclos
-    list_of_str = ['{']
-    for key, value in items.items():
-        if not isinstance(key, str):
-            key = json.dumps(key)
-            
-        if isinstance(value, dict):
-            value = make_str_from_dict(value, enclos + 1)
-
-        if not isinstance(value, str):
-            value = json.dumps(value)
-
-        list_of_str.append(f"{indent}    {key}: {value}")
-    list_of_str.append(f"{indent}}}")
-    return '\n'.join(list_of_str)
-
-
-def make_str_from_list(items: list, enclos=0) -> str:
-    """
-    Type checking for the output of strings without quotes,
-    and for the correct output of True, False in the form of true, false.
-    Doesn't matter for .yaml.
-    """
-    indent = '    ' * enclos
-    list_of_str = ['{']
-    for item in items:
-        sign = item['sign']
-
-        if isinstance(item['key'], str):
-            key = item['key']
-        else:
-            key = json.dumps(item['key'])
-
-        if isinstance(item['value'], str):
-            value = item['value']
-        elif isinstance(item['value'], list):
-            value = make_str_from_list(item['value'], enclos + 1)
-        elif isinstance(item['value'], dict):
-            value = make_str_from_dict(item['value'], enclos + 1)
-        else:
-            value = json.dumps(item['value'])
-
-        list_of_str.append(f"{indent}  {sign} {key}: {value}")
-    list_of_str.append(f"{indent}}}")
-    return '\n'.join(list_of_str)
 
 
 def sort_list(items: list):
@@ -118,13 +71,13 @@ def get_list_of_dict(data1, data2) -> list:
     return sort_list(result)
 
 
-def generate_diff(path1, path2) -> str:
+def generate_diff(path1, path2, format_name='stylish') -> str:
     dict_data1 = read_file(path1)
     dict_data2 = read_file(path2)
     sorted_list_of_dict = get_list_of_dict(dict_data1, dict_data2)
-    return make_str_from_list(sorted_list_of_dict)
+    return make_str_from_list(sorted_list_of_dict, format_name)
 
 
 def main() -> None:
     args = parse_args()
-    print(generate_diff(args.first_file, args.second_file))
+    print(generate_diff(args.first_file, args.second_file, args.format))
