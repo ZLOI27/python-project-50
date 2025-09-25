@@ -32,3 +32,6 @@ make full-check
 
 ### Asciinema gendiff of two files for .yaml
 [![asciicast](https://asciinema.org/a/L4rqd8r2dLX1dWcGifc5SFHlA.svg)](https://asciinema.org/a/L4rqd8r2dLX1dWcGifc5SFHlA)
+
+### Asciinema gendiff of two trees
+[![asciicast](https://asciinema.org/a/UcwLpdkKRdO1xMTVAh6NN2F2S.svg)](https://asciinema.org/a/UcwLpdkKRdO1xMTVAh6NN2F2S)
