@@ -3,7 +3,8 @@ import json
 import yaml
 
 from gendiff.cli import parse_args
-from gendiff.views import make_str_from_list
+from gendiff.views.plain import format_output_plain
+from gendiff.views.stylish import format_output_stylish
 
 
 def read_file(path: str):
@@ -25,57 +26,56 @@ def read_file(path: str):
         return None
 
 
-def sort_list(items: list):
-    def sort_by_rule(item: dict) -> tuple:
-        """The sign -> digit for correctly sort items with the same key."""
-        sign_order = {'-': 0, '+': 1, ' ': 2}
-        return (item['key'], sign_order[item['sign']])
-    items.sort(key=sort_by_rule)
-    return items
-
-
-def get_list_of_dict(data1, data2) -> list:
+def get_diff(data1, data2) -> list:
     if data1 == data2:
         return data1
-    result = [
-        {
-            'key': key,
-            'sign': ' ',
-            'value': get_list_of_dict(value, data2[key])
-        }
-        if key in data2 and (
-            (value == data2[key]) or
-            (value != data2[key]) and
-            (isinstance(value, dict) and isinstance(data2[key], dict))
-        )
-        else {
-            'key': key,
-            'sign': '-',
-            'value': value
-        }
-        for key, value in data1.items()
-    ]
-    result.extend([
-        {
-            'key': key,
-            'sign': '+',
-            'value': value
-        }
-        for key, value in data2.items()
-        if (
-            (key not in data1) or
-            (key in data1 and value != data1[key]) and
-            (not isinstance(value, dict) or not isinstance(data2[key], dict))
-        )
-    ])
-    return sort_list(result)
+    diff = []
+    keys = sorted(set(data1.keys()) | set(data2.keys()))
+    for key in keys:
+        if key not in data2:
+            diff.append({
+                'key': key,
+                'status': 'removed',
+                'value': data1[key],
+            })
+        elif key not in data1:
+            diff.append({
+                'key': key,
+                'status': 'added',
+                'value': data2[key],
+            })
+        elif data1[key] == data2[key]:
+            diff.append({
+                'key': key,
+                'status': 'unchanged',
+                'value': data1[key],
+            })
+        elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
+            diff.append({
+                'key': key,
+                'status': 'nested',
+                'value': get_diff(data1[key], data2[key]),
+            })
+        else:
+            diff.append({
+                'key': key,
+                'status': 'changed',
+                'value': data1[key],
+                'new_value': data2[key],
+            })
+            
+    diff.sort(key=lambda item: item['key'])
+    return diff
 
 
 def generate_diff(path1, path2, format_name='stylish') -> str:
     dict_data1 = read_file(path1)
     dict_data2 = read_file(path2)
-    sorted_list_of_dict = get_list_of_dict(dict_data1, dict_data2)
-    return make_str_from_list(sorted_list_of_dict, format_name)
+    sorted_diff = get_diff(dict_data1, dict_data2)
+    if format_name == 'stylish':
+        return format_output_stylish(sorted_diff)
+    elif format_name == 'plain':
+        return format_output_plain(sorted_diff)
 
 
 def main() -> None:
