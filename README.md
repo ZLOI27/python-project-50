@@ -35,3 +35,6 @@ make full-check
 
 ### Asciinema gendiff of two trees
 [![asciicast](https://asciinema.org/a/UcwLpdkKRdO1xMTVAh6NN2F2S.svg)](https://asciinema.org/a/UcwLpdkKRdO1xMTVAh6NN2F2S)
+
+### Asciinema gendiff format plain
+[![asciicast](https://asciinema.org/a/406KH8KdnWPyk14AtZLGKGdMg.svg)](https://asciinema.org/a/406KH8KdnWPyk14AtZLGKGdMg)
