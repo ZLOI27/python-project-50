@@ -48,7 +48,7 @@ def open_file(file_name: str) -> dict:
 def test_generate_diff():
     right_data_stylish = open_file('test_result_stylish.txt')
     right_data_plain = open_file('test_result_plain.txt')
-    # right_data_json = open_file('test_result_json.txt')
+    right_data_json = open_file('test_result_json.txt')
     wrong_str = ''
     
     file3_json = os.path.join(dir_with_data, 'file3.json')
@@ -66,7 +66,7 @@ def test_generate_diff():
     assert generate_diff(file3_yaml, file4_yaml, 'plain') == right_data_plain
     assert generate_diff(file3_yaml, file4_yaml, 'plain') != wrong_str
 
-    # assert generate_diff(file3_json, file4_json, 'json') == right_data_json
-    # assert generate_diff(file3_json, file4_json, 'json') != wrong_str
-    # assert generate_diff(file3_yaml, file4_yaml, 'json') == right_data_json
-    # assert generate_diff(file3_yaml, file4_yaml, 'json') != wrong_str
+    assert generate_diff(file3_json, file4_json, 'json') == right_data_json
+    assert generate_diff(file3_json, file4_json, 'json') != wrong_str
+    assert generate_diff(file3_yaml, file4_yaml, 'json') == right_data_json
+    assert generate_diff(file3_yaml, file4_yaml, 'json') != wrong_str
