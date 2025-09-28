@@ -80,8 +80,11 @@ make full-check
 ### Asciinema gendiff of two files for .yaml
 [![asciicast](https://asciinema.org/a/L4rqd8r2dLX1dWcGifc5SFHlA.svg)](https://asciinema.org/a/L4rqd8r2dLX1dWcGifc5SFHlA)
 
-### Asciinema gendiff of two trees
+### Asciinema gendiff format stylish
 [![asciicast](https://asciinema.org/a/UcwLpdkKRdO1xMTVAh6NN2F2S.svg)](https://asciinema.org/a/UcwLpdkKRdO1xMTVAh6NN2F2S)
 
 ### Asciinema gendiff format plain
 [![asciicast](https://asciinema.org/a/406KH8KdnWPyk14AtZLGKGdMg.svg)](https://asciinema.org/a/406KH8KdnWPyk14AtZLGKGdMg)
+
+### Asciinema gendiff format json
+[![asciicast](https://asciinema.org/a/dQTj1PLuTwLxFFj5ca1uFufG2.svg)](https://asciinema.org/a/dQTj1PLuTwLxFFj5ca1uFufG2)
