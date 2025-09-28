@@ -1,29 +1,8 @@
-import json
-
-import yaml
-
 from gendiff.cli import parse_args
+from gendiff.io_utils import read_file
+from gendiff.views.json_format import format_output_json
 from gendiff.views.plain import format_output_plain
 from gendiff.views.stylish import format_output_stylish
-
-
-def read_file(path: str):
-    try:
-        if path.endswith('.json'):
-            load_data = json.load
-        elif path.endswith(('.yaml', '.yml')):
-            load_data = yaml.safe_load
-        else:
-            raise ValueError
-
-        with open(path, mode='r', encoding='utf-8') as file:
-            return load_data(file)
-    except OSError as error:
-        print(f"ERROR: Can't read file {path}. Reason: {error}")
-        return None
-    except ValueError:
-        print(f"ERROR: Unsupported format of file {path}.")
-        return None
 
 
 def get_diff(data1, data2) -> list:
@@ -72,10 +51,15 @@ def generate_diff(path1, path2, format_name='stylish') -> str:
     dict_data1 = read_file(path1)
     dict_data2 = read_file(path2)
     sorted_diff = get_diff(dict_data1, dict_data2)
-    if format_name == 'stylish':
-        return format_output_stylish(sorted_diff)
-    elif format_name == 'plain':
-        return format_output_plain(sorted_diff)
+    match format_name:
+        case 'stylish':
+            return format_output_stylish(sorted_diff)
+        case 'plain':
+            return format_output_plain(sorted_diff)
+        case 'json':
+            return format_output_json(sorted_diff)
+        case _:
+            print("Wrong format: {format_name}")
 
 
 def main() -> None:
