@@ -33,3 +33,5 @@ jobs:
             -Dsonar.projectKey=ZLOI27_python-project-50
             -Dsonar.organization=zloi27
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.coverage.exclusions=tests/**
+            -Dsonar.exclusions=tests/**
