@@ -1,6 +1,6 @@
 import os
 
-from gendiff.io.utils import read_file
+from gendiff.scripts.utils import read_file
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 dir_with_data = os.path.join(current_dir, 'test_data')

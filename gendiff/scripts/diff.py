@@ -2,7 +2,7 @@ from gendiff.cli import parse_args
 from gendiff.formatters.json_format import format_output_json
 from gendiff.formatters.plain import format_output_plain
 from gendiff.formatters.stylish import format_output_stylish
-from gendiff.io.utils import read_file
+from gendiff.scripts.utils import read_file
 
 
 def get_diff(data1, data2) -> list:
