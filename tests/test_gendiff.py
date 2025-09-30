@@ -1,6 +1,6 @@
 import os
 
-from gendiff.gendiff import generate_diff
+from gendiff.core.gendiff import generate_diff
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 dir_with_data = os.path.join(current_dir, 'test_data')

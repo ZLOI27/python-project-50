@@ -1,8 +1,8 @@
 from gendiff.cli import parse_args
-from gendiff.io_utils import read_file
-from gendiff.views.json_format import format_output_json
-from gendiff.views.plain import format_output_plain
-from gendiff.views.stylish import format_output_stylish
+from gendiff.formatters.json_format import format_output_json
+from gendiff.formatters.plain import format_output_plain
+from gendiff.formatters.stylish import format_output_stylish
+from gendiff.io.utils import read_file
 
 
 def get_diff(data1, data2) -> list:
